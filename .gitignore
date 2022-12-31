@@ -25,3 +25,10 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/photoSharingApp.iml
+.idea/modules.xml
+.idea/libraries/Flutter_Plugins.xml
+.idea/libraries/Dart_SDK.xml
+.idea/libraries/Dart_Packages.xml
