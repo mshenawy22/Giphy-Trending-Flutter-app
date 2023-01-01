@@ -1,3 +1,5 @@
+
+
 class GiphyTrending {
   List<Data>? data;
   Pagination? pagination;
@@ -101,6 +103,7 @@ class Data {
     json['images'] != null ?  Images.fromJson(json['images']) : null;
     user = json['user'] != null ?  User.fromJson(json['user']) : null;
     analyticsResponsePayload = json['analytics_response_payload'];
+
     analytics = json['analytics'] != null
         ?  Analytics.fromJson(json['analytics'])
         : null;
@@ -203,6 +206,9 @@ class Images {
     downsizedLarge = json['downsized_large'] != null
         ?  Downsized.fromJson(json['downsized_large'])
         : null;
+
+    print (downsizedLarge);
+
     downsizedMedium = json['downsized_medium'] != null
         ?  Downsized.fromJson(json['downsized_medium'])
         : null;
