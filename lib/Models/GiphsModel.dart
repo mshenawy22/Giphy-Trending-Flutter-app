@@ -13,19 +13,20 @@ class  GiphsModel extends BaseModel {
 
    GiphyTrending? giphySearchAlbum;
 
-
-  Future<GiphyTrending> fetchImages()  async {
+  fetchTrendingImages()  async {
+    loadingStatus = LoadingStatusE.busy;
     final response = await http.get(Uri.parse('$baseUrl/gifs/trending?api_key=${apiKey}&limit=${integer}&offset=${offset}/'));
-    print ('response code ${response.statusCode}');
     if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      return GiphyTrending.fromJson(jsonDecode(response.body));
+      giphySearchAlbum = GiphyTrending.fromJson(jsonDecode(response.body));
+      loadingStatus = LoadingStatusE.idle;
+
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
+      loadingStatus = LoadingStatusE.error;
       throw Exception('Failed to load album');
     }
+    notifyListeners();
 
   }
 
@@ -35,7 +36,6 @@ class  GiphsModel extends BaseModel {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      notifyListeners();
       giphySearchAlbum = GiphyTrending.fromJson(jsonDecode(response.body));
       loadingStatus = LoadingStatusE.idle;
     } else {
@@ -45,9 +45,7 @@ class  GiphsModel extends BaseModel {
       throw Exception('Failed to load album');
 
     }
-
-
-
+    notifyListeners();
   }
 
   GiphsModel();
