@@ -1,7 +1,7 @@
 
 
 class GiphyTrending {
-  List<Data>? data;
+  List<GifData>? data;
   Pagination? pagination;
   Meta? meta;
 
@@ -9,9 +9,9 @@ class GiphyTrending {
 
   GiphyTrending.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <GifData>[];
       json['data'].forEach((v) {
-        data!.add( Data.fromJson(v));
+        data!.add( GifData.fromJson(v));
       });
     }
     pagination = json['pagination'] != null
@@ -35,7 +35,7 @@ class GiphyTrending {
   }
 }
 
-class Data {
+class GifData {
   String? type;
   String? id;
   String? url;
@@ -58,7 +58,7 @@ class Data {
   String? analyticsResponsePayload;
   Analytics? analytics;
 
-  Data(
+  GifData(
       {this.type,
         this.id,
         this.url,
@@ -81,7 +81,7 @@ class Data {
         this.analyticsResponsePayload,
         this.analytics});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  GifData.fromJson(Map<String, dynamic> json) {
     type = json['type'];
     id = json['id'];
     url = json['url'];
@@ -206,8 +206,6 @@ class Images {
     downsizedLarge = json['downsized_large'] != null
         ?  Downsized.fromJson(json['downsized_large'])
         : null;
-
-    print (downsizedLarge);
 
     downsizedMedium = json['downsized_medium'] != null
         ?  Downsized.fromJson(json['downsized_medium'])
