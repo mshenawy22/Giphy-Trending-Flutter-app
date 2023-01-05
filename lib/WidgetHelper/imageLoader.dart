@@ -17,6 +17,7 @@ class imageLoader extends StatelessWidget {
         }
         return Center(
           child: CircularProgressIndicator(
+            color: Colors.yellow,
             value: loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
                 loadingProgress.expectedTotalBytes!
