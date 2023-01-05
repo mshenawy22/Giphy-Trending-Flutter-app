@@ -11,7 +11,8 @@ const MaximumOfssets = 100;
 
 class  GiphsModel extends BaseModel {
 
-   GiphyTrending? giphySearchAlbum;
+   GiphyQuery? giphyTrendingAlbum;
+   GiphyQuery? giphySearchAlbum;
 
    int offset = 0;
    int limit = giphsPerPage;
@@ -20,7 +21,7 @@ class  GiphsModel extends BaseModel {
     loadingStatus = LoadingStatusE.busy;
     final response = await http.get(Uri.parse('$baseUrl/gifs/trending?api_key=${apiKey}&limit=${limit}&offset=${offset}/'));
     if (response.statusCode == 200) {
-      giphySearchAlbum = GiphyTrending.fromJson(jsonDecode(response.body));
+      giphyTrendingAlbum = GiphyQuery.fromJson(jsonDecode(response.body));
       loadingStatus = LoadingStatusE.idle;
     } else {
       // If the server did not return a 200 OK response,
@@ -35,12 +36,13 @@ class  GiphsModel extends BaseModel {
   }
 
    searchImages(String searchString)  async {
+
     loadingStatus = LoadingStatusE.busy;
     final response = await http.get(Uri.parse('$baseUrl/gifs/search?api_key=${apiKey}&q=${searchString}&limit=${limit}&offset=${offset}/'));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      giphySearchAlbum = GiphyTrending.fromJson(jsonDecode(response.body));
+      giphySearchAlbum = GiphyQuery.fromJson(jsonDecode(response.body));
       loadingStatus = LoadingStatusE.idle;
     } else {
       // If the server did not return a 200 OK response,
