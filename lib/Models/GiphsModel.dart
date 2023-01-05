@@ -18,13 +18,10 @@ class  GiphsModel extends BaseModel {
 
   fetchTrendingImages()  async {
     loadingStatus = LoadingStatusE.busy;
-    print (offset);
     final response = await http.get(Uri.parse('$baseUrl/gifs/trending?api_key=${apiKey}&limit=${limit}&offset=${offset}/'));
     if (response.statusCode == 200) {
       giphySearchAlbum = GiphyTrending.fromJson(jsonDecode(response.body));
       loadingStatus = LoadingStatusE.idle;
-
-
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
