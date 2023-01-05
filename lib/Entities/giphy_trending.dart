@@ -1,13 +1,13 @@
 
 
-class GiphyTrending {
+class GiphyQuery {
   List<GifData>? data;
   Pagination? pagination;
   Meta? meta;
 
-  GiphyTrending({this.data, this.pagination, this.meta});
+  GiphyQuery({this.data, this.pagination, this.meta});
 
-  GiphyTrending.fromJson(Map<String, dynamic> json) {
+  GiphyQuery.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <GifData>[];
       json['data'].forEach((v) {
