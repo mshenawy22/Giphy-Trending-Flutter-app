@@ -23,6 +23,7 @@ class _TrendingPageState extends State<TrendingPage> {
   // late Future<GiphyTrending> giphyTrendingAlbum;
   // late Future<GiphyTrending> giphySearchAlbum;
   late ScrollController _scrollController;
+  bool showButtomLoader = true;
 
   @override
   void initState() {
@@ -35,10 +36,14 @@ class _TrendingPageState extends State<TrendingPage> {
           _scrollController.position.maxScrollExtent) {
        var pos =  _scrollController.position ;
        var currentScrollOffset = _scrollController.offset!;
+       showButtomLoader = true;
         if (context.read<GiphsModel>().offset <= MaximumOfssets) { // on bottom scroll API Call until last page
           context.read<GiphsModel>().fetchTrendingImages();
           // _scrollController.createScrollPosition(physics, context.read(), pos);
         }
+      }
+      else {
+        showButtomLoader = false;
       }
     });
 
@@ -111,7 +116,8 @@ class _TrendingPageState extends State<TrendingPage> {
                 children.add(
                    const Padding(
                     padding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+
+                    EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     child:
                           Center (
                               child :Text('This Gif is not available at the moment')))
@@ -119,13 +125,20 @@ class _TrendingPageState extends State<TrendingPage> {
 
               }
           }
+            showButtomLoader ?
+            children.add(
+                const Padding (
+                  padding: EdgeInsets.only(top: 10),
+                  child : Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.red,
+                      ) ))
+                )
+               :
+            children.add(  const SizedBox());
+
+          //     children
         }
-        // else {
-        //
-        //   children.add(Center (
-        //       child : LinearProgressIndicator()
-        //   ));
-        // }
 
         return  Scaffold(
             appBar:  EasySearchBar(
@@ -139,21 +152,26 @@ class _TrendingPageState extends State<TrendingPage> {
               // Center is a layout widget. It takes a single child and positions it
               // in the middle of the parent.
                 child:
-                model.loadingStatus == LoadingStatusE.idle?
-                ListView(
-                    shrinkWrap : true,
-                  controller: _scrollController,
-                  children: children ,
-                ):                  // By default, show a loading spinner.
-                const Center (
+                        model.loadingStatus == LoadingStatusE.idle?
+                        ListView(
+                          shrinkWrap : true,
+                          controller: _scrollController,
+                          children:   children
 
-                    child : LinearProgressIndicator()
-                )
 
-            )
+                        ):                  // By default, show a loading spinner.
+                        const Center (
+
+                            child : LinearProgressIndicator()
+                        ),
+
+                    )
+
+
+            );
 
           // This trailing comma makes auto-formatting nicer for build methods.
-        );
+
       });
 
   }
