@@ -44,9 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
         int index = 0;
 
         // print (snapshot.data!.data![0].images!.original!.webp!);
-        if (model.giphySearchAlbum != null ) {
+        if (model.giphyTrendingAlbum != null ) {
 
-          for (var element in model.giphySearchAlbum!.data!) {
+          for (var element in model.giphyTrendingAlbum!.data!) {
             index += 1;
             children.add(Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
