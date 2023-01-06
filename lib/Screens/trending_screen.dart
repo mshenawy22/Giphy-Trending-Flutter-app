@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Constants/colors.dart';
 import '../Constants/text_styles.dart';
+import '../Entities/giphy_trending.dart';
 import '../Models/GiphsModel.dart';
 import '../Models/base_model.dart';
 import '../WidgetHelper/imageLoader.dart';
@@ -24,6 +26,8 @@ class _TrendingPageState extends State<TrendingPage> {
   // late Future<GiphyTrending> giphySearchAlbum;
   late ScrollController _scrollController;
   bool showButtomLoader = true;
+  bool isSearchQuery = false;
+  String searchQuery = '';
 
   @override
   void initState() {
@@ -34,12 +38,9 @@ class _TrendingPageState extends State<TrendingPage> {
 
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-       var pos =  _scrollController.position ;
-       var currentScrollOffset = _scrollController.offset!;
        showButtomLoader = true;
         if (context.read<GiphsModel>().offset <= MaximumOfssets) { // on bottom scroll API Call until last page
           context.read<GiphsModel>().fetchTrendingImages();
-          // _scrollController.createScrollPosition(physics, context.read(), pos);
         }
       }
       else {
@@ -52,22 +53,31 @@ class _TrendingPageState extends State<TrendingPage> {
   @override
   Widget build(BuildContext context) {
 
-
     return
-      Consumer<GiphsModel>(builder: (context, model, child)
+      Consumer <GiphsModel>(builder: (context, model, child)
       {
         var children  = <Widget>[] ;
         int index = 0;
+        GiphyQuery? giphyQuery ;
+        if (searchQuery == '' ) isSearchQuery = false ;
+        if (isSearchQuery == true) {
+          giphyQuery = model.giphySearchAlbum ;
+        }
+        else {
+          giphyQuery = model.giphyTrendingAlbum ;
+        }
 
-        // print (snapshot.data!.data![0].images!.original!.webp!);
-        if (model.giphySearchAlbum != null ) {
-            children.add(
-             Padding (
-              padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
-              child :   Text('Most Trending Giphs of today'  , style: trendingScreenHeading)
-             )
-            );
-          for (var element in model.giphySearchAlbum!.data!) {
+        if (giphyQuery != null ) {
+            // children.add(
+            //  Padding (
+            //   padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
+            //      // alignment : Alignment.topLeft,
+            //   child :
+            //      Text(isSearchQuery ?  'Search : $searchQuery':' Most Trending Giphs of today' ,
+            //       style: trendingScreenHeading)
+            //  )
+            // );
+          for (var element in giphyQuery.data!) {
             index += 1;
             children.add(
               Center (
@@ -125,7 +135,7 @@ class _TrendingPageState extends State<TrendingPage> {
 
               }
           }
-            showButtomLoader ?
+            showButtomLoader && !isSearchQuery ?
             children.add(
                 const Padding (
                   padding: EdgeInsets.only(top: 10),
@@ -142,29 +152,54 @@ class _TrendingPageState extends State<TrendingPage> {
 
         return  Scaffold(
             appBar:  EasySearchBar(
+                actions : [
+                  TextButton(
+                   child: const Text ('Trending' , style: TextStyle(color: clearButtontextColor) ,),
+                      onPressed: ()
+                        {
+                           isSearchQuery = false ;
 
+                           model.notifyListeners();
+                        }
+
+
+              ),
+                ],
               title: const Text(appTitle),
                backgroundColor : Colors.yellow,
-              onSearch: (value) => model.fetchTrendingImages(),
+              onSearch: (value)
+              {
+                isSearchQuery = true;
+                searchQuery = value;
+                model.searchImages(value);
+              },
             )
             ,
             body: Center(
               // Center is a layout widget. It takes a single child and positions it
               // in the middle of the parent.
                 child:
+                    ListView(
+                      children : [
+                         Padding (
+                          padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
+                             // alignment : Alignment.topLeft,
+                          child :
+                             Text(isSearchQuery ?  'Search : $searchQuery':' Most Trending Giphs of today' ,
+                              style: trendingScreenHeading)
+                         ),
+
                         model.loadingStatus == LoadingStatusE.idle?
                         ListView(
-                          shrinkWrap : true,
-                          controller: _scrollController,
-                          children:   children
-
-
+                            shrinkWrap : true,
+                            controller: _scrollController,
+                            children:   children
                         ):                  // By default, show a loading spinner.
                         const Center (
-
                             child : LinearProgressIndicator()
                         ),
-
+                      ]
+                    )
                     )
 
 
