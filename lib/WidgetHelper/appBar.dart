@@ -10,6 +10,7 @@ class PhotoSharingAppBars  {
 
   static PreferredSizeWidget fullImageScreenAppBar = AppBar(
         backgroundColor : appBarColor ,
+      foregroundColor : appBarForegroundColor
     );
 
 }
