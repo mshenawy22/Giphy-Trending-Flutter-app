@@ -68,15 +68,7 @@ class _TrendingPageState extends State<TrendingPage> {
         }
 
         if (giphyQuery != null ) {
-            // children.add(
-            //  Padding (
-            //   padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
-            //      // alignment : Alignment.topLeft,
-            //   child :
-            //      Text(isSearchQuery ?  'Search : $searchQuery':' Most Trending Giphs of today' ,
-            //       style: trendingScreenHeading)
-            //  )
-            // );
+
           for (var element in giphyQuery.data!) {
             index += 1;
             children.add(
@@ -158,7 +150,7 @@ class _TrendingPageState extends State<TrendingPage> {
                       onPressed: ()
                         {
                            isSearchQuery = false ;
-
+                           _scrollController.jumpTo(0);
                            model.notifyListeners();
                         }
 
@@ -172,6 +164,7 @@ class _TrendingPageState extends State<TrendingPage> {
                 isSearchQuery = true;
                 searchQuery = value;
                 model.searchImages(value);
+                _scrollController.jumpTo(0);
               },
             )
             ,
@@ -180,19 +173,23 @@ class _TrendingPageState extends State<TrendingPage> {
               // in the middle of the parent.
                 child:
                     ListView(
+                        shrinkWrap : true,
+                        controller: _scrollController,
                       children : [
-                         Padding (
-                          padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
-                             // alignment : Alignment.topLeft,
-                          child :
-                             Text(isSearchQuery ?  'Search : $searchQuery':' Most Trending Giphs of today' ,
-                              style: trendingScreenHeading)
-                         ),
+                        Align (
+                          alignment: Alignment.topLeft,
+                          child:
+                          Padding (
+                              padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
+                              // alignment : Alignment.topLeft,
+                              child :
+                              Text(isSearchQuery ?  'Search : $searchQuery':' Most Trending Giphs of today' ,
+                                  style: trendingScreenHeading)
+                          ),
+                        ),
 
                         model.loadingStatus == LoadingStatusE.idle?
-                        ListView(
-                            shrinkWrap : true,
-                            controller: _scrollController,
+                        Column(
                             children:   children
                         ):                  // By default, show a loading spinner.
                         const Center (
