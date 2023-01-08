@@ -1,5 +1,3 @@
-
-
 class GiphyQuery {
   List<GifData>? data;
   Pagination? pagination;
@@ -11,17 +9,17 @@ class GiphyQuery {
     if (json['data'] != null) {
       data = <GifData>[];
       json['data'].forEach((v) {
-        data!.add( GifData.fromJson(v));
+        data!.add(GifData.fromJson(v));
       });
     }
     pagination = json['pagination'] != null
-        ?  Pagination.fromJson(json['pagination'])
+        ? Pagination.fromJson(json['pagination'])
         : null;
-    meta = json['meta'] != null ?  Meta.fromJson(json['meta']) : null;
+    meta = json['meta'] != null ? Meta.fromJson(json['meta']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -60,26 +58,26 @@ class GifData {
 
   GifData(
       {this.type,
-        this.id,
-        this.url,
-        this.slug,
-        this.bitlyGifUrl,
-        this.bitlyUrl,
-        this.embedUrl,
-        this.username,
-        this.source,
-        this.title,
-        this.rating,
-        this.contentUrl,
-        this.sourceTld,
-        this.sourcePostUrl,
-        this.isSticker,
-        this.importDatetime,
-        this.trendingDatetime,
-        this.images,
-        this.user,
-        this.analyticsResponsePayload,
-        this.analytics});
+      this.id,
+      this.url,
+      this.slug,
+      this.bitlyGifUrl,
+      this.bitlyUrl,
+      this.embedUrl,
+      this.username,
+      this.source,
+      this.title,
+      this.rating,
+      this.contentUrl,
+      this.sourceTld,
+      this.sourcePostUrl,
+      this.isSticker,
+      this.importDatetime,
+      this.trendingDatetime,
+      this.images,
+      this.user,
+      this.analyticsResponsePayload,
+      this.analytics});
 
   GifData.fromJson(Map<String, dynamic> json) {
     type = json['type'];
@@ -99,18 +97,17 @@ class GifData {
     isSticker = json['is_sticker'];
     importDatetime = json['import_datetime'];
     trendingDatetime = json['trending_datetime'];
-    images =
-    json['images'] != null ?  Images.fromJson(json['images']) : null;
-    user = json['user'] != null ?  User.fromJson(json['user']) : null;
+    images = json['images'] != null ? Images.fromJson(json['images']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     analyticsResponsePayload = json['analytics_response_payload'];
 
     analytics = json['analytics'] != null
-        ?  Analytics.fromJson(json['analytics'])
+        ? Analytics.fromJson(json['analytics'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['type'] = type;
     data['id'] = id;
     data['url'] = url;
@@ -171,107 +168,106 @@ class Images {
 
   Images(
       {this.original,
-        this.downsized,
-        this.downsizedLarge,
-        this.downsizedMedium,
-        this.downsizedSmall,
-        this.downsizedStill,
-        this.fixedHeight,
-        this.fixedHeightDownsampled,
-        this.fixedHeightSmall,
-        this.fixedHeightSmallStill,
-        this.fixedHeightStill,
-        this.fixedWidth,
-        this.fixedWidthDownsampled,
-        this.fixedWidthSmall,
-        this.fixedWidthSmallStill,
-        this.fixedWidthStill,
-        this.looping,
-        this.originalStill,
-        this.originalMp4,
-        this.preview,
-        this.previewGif,
-        this.previewWebp,
-        this.hd,
-        this.d480wStill,
-        this.d4k});
+      this.downsized,
+      this.downsizedLarge,
+      this.downsizedMedium,
+      this.downsizedSmall,
+      this.downsizedStill,
+      this.fixedHeight,
+      this.fixedHeightDownsampled,
+      this.fixedHeightSmall,
+      this.fixedHeightSmallStill,
+      this.fixedHeightStill,
+      this.fixedWidth,
+      this.fixedWidthDownsampled,
+      this.fixedWidthSmall,
+      this.fixedWidthSmallStill,
+      this.fixedWidthStill,
+      this.looping,
+      this.originalStill,
+      this.originalMp4,
+      this.preview,
+      this.previewGif,
+      this.previewWebp,
+      this.hd,
+      this.d480wStill,
+      this.d4k});
 
   Images.fromJson(Map<String, dynamic> json) {
-    original = json['original'] != null
-        ?  Original.fromJson(json['original'])
-        : null;
+    original =
+        json['original'] != null ? Original.fromJson(json['original']) : null;
     downsized = json['downsized'] != null
-        ?  Downsized.fromJson(json['downsized'])
+        ? Downsized.fromJson(json['downsized'])
         : null;
     downsizedLarge = json['downsized_large'] != null
-        ?  Downsized.fromJson(json['downsized_large'])
+        ? Downsized.fromJson(json['downsized_large'])
         : null;
 
     downsizedMedium = json['downsized_medium'] != null
-        ?  Downsized.fromJson(json['downsized_medium'])
+        ? Downsized.fromJson(json['downsized_medium'])
         : null;
     downsizedSmall = json['downsized_small'] != null
-        ?  DownsizedSmall.fromJson(json['downsized_small'])
+        ? DownsizedSmall.fromJson(json['downsized_small'])
         : null;
     downsizedStill = json['downsized_still'] != null
-        ?  Downsized.fromJson(json['downsized_still'])
+        ? Downsized.fromJson(json['downsized_still'])
         : null;
     fixedHeight = json['fixed_height'] != null
-        ?  FixedHeight.fromJson(json['fixed_height'])
+        ? FixedHeight.fromJson(json['fixed_height'])
         : null;
     fixedHeightDownsampled = json['fixed_height_downsampled'] != null
-        ?  FixedHeightDownsampled.fromJson(json['fixed_height_downsampled'])
+        ? FixedHeightDownsampled.fromJson(json['fixed_height_downsampled'])
         : null;
     fixedHeightSmall = json['fixed_height_small'] != null
-        ?  FixedHeight.fromJson(json['fixed_height_small'])
+        ? FixedHeight.fromJson(json['fixed_height_small'])
         : null;
     fixedHeightSmallStill = json['fixed_height_small_still'] != null
-        ?  Downsized.fromJson(json['fixed_height_small_still'])
+        ? Downsized.fromJson(json['fixed_height_small_still'])
         : null;
     fixedHeightStill = json['fixed_height_still'] != null
-        ?  Downsized.fromJson(json['fixed_height_still'])
+        ? Downsized.fromJson(json['fixed_height_still'])
         : null;
     fixedWidth = json['fixed_width'] != null
-        ?  FixedHeight.fromJson(json['fixed_width'])
+        ? FixedHeight.fromJson(json['fixed_width'])
         : null;
     fixedWidthDownsampled = json['fixed_width_downsampled'] != null
-        ?  FixedHeightDownsampled.fromJson(json['fixed_width_downsampled'])
+        ? FixedHeightDownsampled.fromJson(json['fixed_width_downsampled'])
         : null;
     fixedWidthSmall = json['fixed_width_small'] != null
-        ?  FixedHeight.fromJson(json['fixed_width_small'])
+        ? FixedHeight.fromJson(json['fixed_width_small'])
         : null;
     fixedWidthSmallStill = json['fixed_width_small_still'] != null
-        ?  Downsized.fromJson(json['fixed_width_small_still'])
+        ? Downsized.fromJson(json['fixed_width_small_still'])
         : null;
     fixedWidthStill = json['fixed_width_still'] != null
-        ?  Downsized.fromJson(json['fixed_width_still'])
+        ? Downsized.fromJson(json['fixed_width_still'])
         : null;
     looping =
-    json['looping'] != null ?  Looping.fromJson(json['looping']) : null;
+        json['looping'] != null ? Looping.fromJson(json['looping']) : null;
     originalStill = json['original_still'] != null
-        ?  Downsized.fromJson(json['original_still'])
+        ? Downsized.fromJson(json['original_still'])
         : null;
     originalMp4 = json['original_mp4'] != null
-        ?  DownsizedSmall.fromJson(json['original_mp4'])
+        ? DownsizedSmall.fromJson(json['original_mp4'])
         : null;
     preview = json['preview'] != null
-        ?  DownsizedSmall.fromJson(json['preview'])
+        ? DownsizedSmall.fromJson(json['preview'])
         : null;
     previewGif = json['preview_gif'] != null
-        ?  Downsized.fromJson(json['preview_gif'])
+        ? Downsized.fromJson(json['preview_gif'])
         : null;
     previewWebp = json['preview_webp'] != null
-        ?  Downsized.fromJson(json['preview_webp'])
+        ? Downsized.fromJson(json['preview_webp'])
         : null;
-    hd = json['hd'] != null ?  DownsizedSmall.fromJson(json['hd']) : null;
+    hd = json['hd'] != null ? DownsizedSmall.fromJson(json['hd']) : null;
     d480wStill = json['480w_still'] != null
-        ?  Downsized.fromJson(json['480w_still'])
+        ? Downsized.fromJson(json['480w_still'])
         : null;
-    d4k = json['4k'] != null ?  DownsizedSmall.fromJson(json['4k']) : null;
+    d4k = json['4k'] != null ? DownsizedSmall.fromJson(json['4k']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (original != null) {
       data['original'] = original!.toJson();
     }
@@ -365,15 +361,15 @@ class Original {
 
   Original(
       {this.height,
-        this.width,
-        this.size,
-        this.url,
-        this.mp4Size,
-        this.mp4,
-        this.webpSize,
-        this.webp,
-        this.frames,
-        this.hash});
+      this.width,
+      this.size,
+      this.url,
+      this.mp4Size,
+      this.mp4,
+      this.webpSize,
+      this.webp,
+      this.frames,
+      this.hash});
 
   Original.fromJson(Map<String, dynamic> json) {
     height = json['height'];
@@ -389,7 +385,7 @@ class Original {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['height'] = height;
     data['width'] = width;
     data['size'] = size;
@@ -420,7 +416,7 @@ class Downsized {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['height'] = height;
     data['width'] = width;
     data['size'] = size;
@@ -445,7 +441,7 @@ class DownsizedSmall {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['height'] = height;
     data['width'] = width;
     data['mp4_size'] = mp4Size;
@@ -466,13 +462,13 @@ class FixedHeight {
 
   FixedHeight(
       {this.height,
-        this.width,
-        this.size,
-        this.url,
-        this.mp4Size,
-        this.mp4,
-        this.webpSize,
-        this.webp});
+      this.width,
+      this.size,
+      this.url,
+      this.mp4Size,
+      this.mp4,
+      this.webpSize,
+      this.webp});
 
   FixedHeight.fromJson(Map<String, dynamic> json) {
     height = json['height'];
@@ -486,7 +482,7 @@ class FixedHeight {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['height'] = height;
     data['width'] = width;
     data['size'] = size;
@@ -520,7 +516,7 @@ class FixedHeightDownsampled {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['height'] = height;
     data['width'] = width;
     data['size'] = size;
@@ -543,7 +539,7 @@ class Looping {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['mp4_size'] = mp4Size;
     data['mp4'] = mp4;
     return data;
@@ -564,15 +560,15 @@ class User {
 
   User(
       {this.avatarUrl,
-        this.bannerImage,
-        this.bannerUrl,
-        this.profileUrl,
-        this.username,
-        this.displayName,
-        this.description,
-        this.instagramUrl,
-        this.websiteUrl,
-        this.isVerified});
+      this.bannerImage,
+      this.bannerUrl,
+      this.profileUrl,
+      this.username,
+      this.displayName,
+      this.description,
+      this.instagramUrl,
+      this.websiteUrl,
+      this.isVerified});
 
   User.fromJson(Map<String, dynamic> json) {
     avatarUrl = json['avatar_url'];
@@ -588,7 +584,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['avatar_url'] = avatarUrl;
     data['banner_image'] = bannerImage;
     data['banner_url'] = bannerUrl;
@@ -611,16 +607,13 @@ class Analytics {
   Analytics({this.onload, this.onclick, this.onsent});
 
   Analytics.fromJson(Map<String, dynamic> json) {
-    onload =
-    json['onload'] != null ?  Onload.fromJson(json['onload']) : null;
-    onclick =
-    json['onclick'] != null ?  Onload.fromJson(json['onclick']) : null;
-    onsent =
-    json['onsent'] != null ?  Onload.fromJson(json['onsent']) : null;
+    onload = json['onload'] != null ? Onload.fromJson(json['onload']) : null;
+    onclick = json['onclick'] != null ? Onload.fromJson(json['onclick']) : null;
+    onsent = json['onsent'] != null ? Onload.fromJson(json['onsent']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (onload != null) {
       data['onload'] = onload!.toJson();
     }
@@ -644,7 +637,7 @@ class Onload {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['url'] = url;
     return data;
   }
@@ -664,7 +657,7 @@ class Pagination {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['total_count'] = totalCount;
     data['count'] = count;
     data['offset'] = offset;
@@ -686,7 +679,7 @@ class Meta {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['msg'] = msg;
     data['response_id'] = responseId;

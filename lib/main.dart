@@ -1,30 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'Entities/giphy_trending.dart';
-import 'Models/GiphsModel.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
-
+import 'Models/giphs_model.dart';
 import 'Models/base_model.dart';
 import 'Screens/home_screen.dart';
-import 'Constants/constants.dart';
-
 
 void main() {
-  runApp(
-  MultiProvider(
-      providers :[
-        ChangeNotifierProvider<BaseModel>(
-          create: (_) =>  BaseModel() ,
-          // child: MyApp(),
-        ),
-        ChangeNotifierProvider<GiphsModel>(
-          create: (_) =>  GiphsModel() ,
-          // child: MyApp(),
-        ),
-      ],
-      child : const MyApp()
-  ));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<BaseModel>(
+      create: (_) => BaseModel(),
+    ),
+    ChangeNotifierProvider<GiphsModel>(
+      create: (_) => GiphsModel(),
+    ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -51,5 +39,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
