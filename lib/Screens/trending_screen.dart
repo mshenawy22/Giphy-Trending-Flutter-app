@@ -1,5 +1,6 @@
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../Constants/colors.dart';
 import '../Constants/text_styles.dart';
@@ -20,7 +21,7 @@ class TrendingPage extends StatefulWidget {
 class _TrendingPageState extends State<TrendingPage> {
   // late Future<GiphyTrending> giphyTrendingAlbum;
   // late Future<GiphyTrending> giphySearchAlbum;
-  late ScrollController _scrollController;
+  late ScrollController scrollController;
   bool showButtomLoader = true;
   bool isSearchQuery = false;
   String searchQuery = '';
@@ -29,10 +30,10 @@ class _TrendingPageState extends State<TrendingPage> {
   void initState() {
     super.initState();
     context.read<GiphsModel>().fetchTrendingImages();
-    _scrollController = ScrollController(keepScrollOffset: true);
-    _scrollController.addListener(() async {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
+    scrollController = ScrollController(keepScrollOffset: true);
+    scrollController.addListener(() async {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
         showButtomLoader = true;
         if (context.read<GiphsModel>().offset <= maxNofOfssets) {
           // on bottom scroll API Call until last page
@@ -60,7 +61,9 @@ class _TrendingPageState extends State<TrendingPage> {
       if (giphyQuery != null) {
         for (var element in giphyQuery.data!) {
           index += 1;
-          children.add(Center(
+          children.add(
+              Center(
+                key:  Key ('index_$index'),
               child: Container(
                   // margin: const EdgeInsets.all(200.0),
                   padding: const EdgeInsets.all(10),
@@ -68,7 +71,8 @@ class _TrendingPageState extends State<TrendingPage> {
                       // borderRadius : BorderRadius.circular(10),
                       color: Colors.yellow,
                       shape: BoxShape.circle),
-                  child: Text('$index', style: photoIndexBold))));
+                  child: Text('$index', style: photoIndexBold,
+                  ))));
           if (element.images?.original?.webp != null) {
             children.add(Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
@@ -118,7 +122,7 @@ class _TrendingPageState extends State<TrendingPage> {
                   ),
                   onPressed: () {
                     isSearchQuery = false;
-                    _scrollController.jumpTo(0);
+                    scrollController.jumpTo(0);
                   }),
             ],
             title: const Text(appTitle),
@@ -127,7 +131,7 @@ class _TrendingPageState extends State<TrendingPage> {
               isSearchQuery = true;
               searchQuery = value;
               model.searchImages(value);
-              _scrollController.jumpTo(0);
+              scrollController.jumpTo(0);
             },
           ),
           body: Center(
@@ -135,7 +139,7 @@ class _TrendingPageState extends State<TrendingPage> {
               // in the middle of the parent.
               child: ListView(
                   shrinkWrap: true,
-                  controller: _scrollController,
+                  controller: scrollController,
                   children: [
                 Align(
                   alignment: Alignment.topLeft,
@@ -143,16 +147,29 @@ class _TrendingPageState extends State<TrendingPage> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 10),
                       // alignment : Alignment.topLeft,
-                      child: Text(
+                      child:
                           isSearchQuery
-                              ? 'Search : $searchQuery'
-                              : ' Most Trending Giphs of today',
-                          style: trendingScreenHeading)),
-                ),
+                              ? Text ('Search : $searchQuery')
+                              :     RichText(
+                            overflow: TextOverflow.visible,
+                            maxLines: 4,
+                            text: TextSpan(
+                                text: 'Whats trending\n',
+                                style: trendingScreenHeading,
+                                children: [
+                                  TextSpan(
+                                      text: ' ${DateFormat('dd MMMM').format(DateTime.now())}',
+                                      style: trendingScreenSubHeading),
+                                ]),
+                          ))),
+
                 model.loadingStatus == LoadingStatusE.idle
                     ? Column(children: children)
                     : // By default, show a loading spinner.
-                    const Center(child: LinearProgressIndicator()),
+                     SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        child: const LinearProgressIndicator()
+                    ),
               ])));
 
       // This trailing comma makes auto-formatting nicer for build methods.
