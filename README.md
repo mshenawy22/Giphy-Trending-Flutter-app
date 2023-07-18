@@ -3,6 +3,16 @@
 GiphyTrends is a Flutter application that allows users to explore the most trending GIFs and search for GIFs using keywords. With a user-friendly interface and seamless integration with the Giphy API, GiphyTrends provides a fun and engaging experience for discovering and sharing animated GIFs.
 
 
+
+https://github.com/mshenawy22/Giphy-Trending-Flutter-app/assets/49027183/5ef17ee7-5389-4df6-ac73-75f46f8b174a
+
+
+
+https://github.com/mshenawy22/Giphy-Trending-Flutter-app/assets/49027183/0d75fbbf-901a-48b9-b9a3-fd412145b75d
+
+
+
+
 ## Features
 
 - **Trending GIFs**: Browse and view the most popular and trending GIFs across various categories.
@@ -21,6 +31,8 @@ GiphyTrends is a Flutter application that allows users to explore the most trend
 ```shell
 git clone https://github.com/your-username/giphytrends.git
 ```
+
+
 
 3. Navigate to the project directory:
 
@@ -48,13 +60,10 @@ To use the Giphy API, you need to obtain an API key. Follow these steps to confi
 
 2. Once logged in, create a new app to generate an API key.
 
-3. Open the `lib/utils/api.dart` file in your project and replace the `YOUR_API_KEY` with your actual Giphy API key.
+3. Open the 'giphs_model.dart' file in your project and replace the `YOUR_API_KEY` with your actual Giphy API key.
 
 ```dart
-class API {
-  static const String baseUrl = 'https://api.giphy.com/v1/gifs';
-  static const String apiKey = 'YOUR_API_KEY';
-}
+const apiKey = '';
 ```
 
 4. Save the file and rebuild the app. Your Giphy API key will now be used to make requests to the Giphy API.
