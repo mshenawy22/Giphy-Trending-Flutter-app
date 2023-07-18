@@ -3,6 +3,16 @@
 GiphyTrends is a Flutter application that allows users to explore the most trending GIFs and search for GIFs using keywords. With a user-friendly interface and seamless integration with the Giphy API, GiphyTrends provides a fun and engaging experience for discovering and sharing animated GIFs.
 
 
+
+https://github.com/mshenawy22/Giphy-Trending-Flutter-app/assets/49027183/5ef17ee7-5389-4df6-ac73-75f46f8b174a
+
+
+
+https://github.com/mshenawy22/Giphy-Trending-Flutter-app/assets/49027183/0d75fbbf-901a-48b9-b9a3-fd412145b75d
+
+
+
+
 ## Features
 
 - **Trending GIFs**: Browse and view the most popular and trending GIFs across various categories.
