@@ -32,6 +32,8 @@ https://github.com/mshenawy22/Giphy-Trending-Flutter-app/assets/49027183/0d75fbb
 git clone https://github.com/your-username/giphytrends.git
 ```
 
+
+
 3. Navigate to the project directory:
 
 ```shell
@@ -59,12 +61,10 @@ To use the Giphy API, you need to obtain an API key. Follow these steps to confi
 2. Once logged in, create a new app to generate an API key.
 
 3. Open the `lib/utils/api.dart` file in your project and replace the `YOUR_API_KEY` with your actual Giphy API key.
+Replace your api key at giphs_model.dart
 
 ```dart
-class API {
-  static const String baseUrl = 'https://api.giphy.com/v1/gifs';
-  static const String apiKey = 'YOUR_API_KEY';
-}
+const apiKey = '';
 ```
 
 4. Save the file and rebuild the app. Your Giphy API key will now be used to make requests to the Giphy API.
