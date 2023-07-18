@@ -60,8 +60,7 @@ To use the Giphy API, you need to obtain an API key. Follow these steps to confi
 
 2. Once logged in, create a new app to generate an API key.
 
-3. Open the `lib/utils/api.dart` file in your project and replace the `YOUR_API_KEY` with your actual Giphy API key.
-Replace your api key at giphs_model.dart
+3. Open the 'giphs_model.dart' file in your project and replace the `YOUR_API_KEY` with your actual Giphy API key.
 
 ```dart
 const apiKey = '';
